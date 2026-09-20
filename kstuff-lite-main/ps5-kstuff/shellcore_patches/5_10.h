@@ -1,0 +1,56 @@
+#ifndef SHELLCORE_PATCHES_5_10
+#define SHELLCORE_PATCHES_5_10
+
+static const struct shellcore_fpkg_offsets shellcore_fpkg_offsets_510 = {
+    .ppr_call = 0x5e928c,
+    .ppr_cave = 0x148c510,
+    .ppr_cave_size = 0x3af0,
+    .close_plt = 0x14841f0,
+    .open_plt = 0x1485130,
+    .pread_plt = 0x1485220,
+    .mount_ppr_pkg_plt = 0x14870b0,
+    .getpid_plt = 0x1483f00,
+};
+
+static struct shellcore_patch shellcore_patches_510_retail[] = {
+    {0xa30fde, "\x52\xeb\x08", 3},
+    {0xa30fe9, "\xe8\x22\xfb\xff\xff\x58\xc3", 7},
+    {0xa30b01, "\x31\xc0\x50\xeb\xe3", 5},
+    {0xa30ae9, "\xe8\x22\x00\x00\x00\x58\xc3", 7},
+    {0x59ed78, "\xeb\x04", 2},
+    {0x2a100c, "\xeb\x04", 2},
+    {0x2a141c, "\xeb\x04", 2},
+    {0x5bbe37, "\xeb", 1},
+    {0x5a59dd, "\x90\xe9", 2},
+    {0x5bcb6f, "\xeb", 1},
+    {0x5be0d3, "\x3b\x01\x00\x00", 4},
+    {0x1c3511, "\xe8\xea\xac\x4c\x00\x31\xc9\xff\xc1\xe9\x24\x02\x00\x00", 14},
+    {0x1c3743, "\x83\xf8\x02\x0f\x43\xc1\xe9\xca\xfb\xff\xff", 11},
+    {0x1c323e, "\xe9\xce\x02\x00\x00", 5},
+
+    {0x13855a0, "\x31\xC0\xC3", 3}, //VR
+    {0x4a5d9c, "\x66\x0F\x1F\x44\x00\x00", 6}, // force getSceSysDirPath to take isDebuggerOrAppHomeLaunchedApp=1 path, by ArkSama
+    {0x8e5647, "\xEB", 1}, // fix trophies not unlocking in certain games
+    {0x1389970, "\x31\xC0\xC3", 3}, // VR2 Update bypass
+
+    {0x8D1486, "\x90\x90\x90\x90\x90", 5}, //disable game error message
+    {0x299BAB, "\x90\xE9", 2}, //PS4 Disc Installer Patch 1
+    {0x299C28, "\x90\xE9", 2}, //PS5 Disc Installer Patch 1
+    {0x299D2B, "\xEB", 1}, //PS4 PKG Installer Patch 1
+    {0x298F2F, "\xEB", 1}, //PS5 PKG Installer Patch 1
+    {0x29A266, "\x90\xE9", 2}, //PS4 PKG Installer Patch 2
+    {0x29A437, "\xeb", 1}, //PS5 PKG Installer Patch 2
+    {0x29A805, "\x90\xE9", 2}, //PS4 PKG Installer Patch 3
+    {0x29A8A2, "\x90\xE9", 2}, //PS5 PKG Installer Patch 3
+    {0x5A0207, "\xEB", 1}, //PS4 PKG Installer Patch 4
+    {0x5A031C, "\xEB", 1}, //PS5 PKG Installer Patch 4
+    {0x5A2DA0, "\x48\x31\xC0\xC3", 4}, //PKG Installer
+};
+
+static struct shellcore_patch shellcore_patches_510_testkit[] = {
+};
+
+static struct shellcore_patch shellcore_patches_510_devkit[] = {
+};
+
+#endif // SHELLCORE_PATCHES_5_10
